@@ -26,7 +26,7 @@
 
 <body>
     <div class="card">
-        <h3>Values</h3>
+        <h3 id="title">Values</h3>
         <div id="values"></div>
     </div>
     <div class="card">
@@ -69,7 +69,7 @@
                 // Add an event listener to the link
                 link.addEventListener('click', () => {
                     // Call your function when the link is clicked
-                    displaySkosElements(schemeUri.value);
+                    displaySkosElements(schemeUri.value, prefLabel.value);
                 });
 
                 listItem.appendChild(link);
@@ -78,7 +78,11 @@
         }
 
 
-        async function displaySkosElements(uri) {
+        async function displaySkosElements(uri, label) {
+
+            const title = document.getElementById('title');
+            title.innerHTML = label;
+
             elements = await fetchLocal(`/scheme?uri=${uri}`)
             const list = document.getElementById('values');
             list.innerHTML = ''; // Clear the list
