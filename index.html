@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lookup SKOS</title>
+    <style>
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .card .list-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .card .list-container>div {
+            margin-right: 50px;
+            -bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h3>Values</h3>
+        <div id="values"></div>
+    </div>
+    <div class="card">
+        <h3>Schemes</h3>
+        <div id="schemes" class="list-container"></div>
+    </div>
+
+
+    <script>
+
+        async function fetchLocal(path) {
+            try {
+                const response = await fetch(`http://localhost:3000${path}`, {
+                    method: 'GET',
+                });
+                return await response.json();
+            } catch (error) {
+                console.error('Error', error);
+            }
+        }
+
+        let schemes = []
+
+        async function load() {
+            schemes = await fetchLocal('/schemes')
+            renderSchemes(schemes)
+        }
+
+
+        function renderSchemes(schemes) {
+            const skosListElement = document.getElementById('schemes');
+            skosListElement.innerHTML = ''; // Clear the list
+            for (const current of schemes.results.bindings) {
+                const { schemeUri, prefLabel } = current
+                const listItem = document.createElement('div');
+                const link = document.createElement('a');
+                link.href = '#';// schemeUri.value;
+                link.textContent = prefLabel.value;
+
+                // Add an event listener to the link
+                link.addEventListener('click', () => {
+                    // Call your function when the link is clicked
+                    displaySkosElements(schemeUri.value);
+                });
+
+                listItem.appendChild(link);
+                skosListElement.appendChild(listItem);
+            }
+        }
+
+
+        async function displaySkosElements(uri) {
+            elements = await fetchLocal(`/scheme?uri=${uri}`)
+            const list = document.getElementById('values');
+            list.innerHTML = ''; // Clear the list
+            for (const current of elements.results.bindings) {
+                const { concept, conceptPrefLabel } = current
+                const listItem = document.createElement('div');
+                const link = document.createElement('a');
+                link.href = concept.value;// concept.value;
+                link.textContent = conceptPrefLabel.value;
+
+                listItem.appendChild(link);
+                list.appendChild(listItem);
+            }
+        }
+
+        load()
+
+    </script>
+</body>
+
+</html>
