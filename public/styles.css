@@ -1,0 +1,17 @@
+.card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.card .list-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card .list-container > div {
+  margin-right: 50px;
+  -bottom: 50px;
+}
