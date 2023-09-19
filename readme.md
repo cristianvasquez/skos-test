@@ -9,5 +9,3 @@ npm install
 ```
 npm run serve
 ```
-
-go to [localhost:3030](http://localhost:3030)
