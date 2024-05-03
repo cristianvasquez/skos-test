@@ -8,28 +8,30 @@
 
 <body>
 
-    <div id="app">
-        <div class="pane">
-            <input id="search-1" class="search" type="text" placeholder="search..."></input>
-            <h3>Schemes</h3>
-            <div id="schemes" class="collection">
+<div id="app">
+    <div class="pane">
+        <input id="search-1" class="search" type="text" placeholder="search..."></input>
+        <h3>Schemes</h3>
+        <div id="schemes" class="collection">
 
-            </div>
-        </div>
-        <div class="pane">
-            <input id="search-2" class="search" type="text" placeholder="search..."></input>
-            <h3 id="title"></h3>
-            <div id="schemeElements" class="collection">
-
-            </div>
-        </div>
-        <div class="pane">
-            <h3 id="turtle-title"></h3>
-            <textarea id="turtle"></textarea>
         </div>
     </div>
+    <div class="pane">
+        <input id="search-2" class="search" type="text" placeholder="search..."></input>
+        <h3 id="title"></h3>
+        <div id="schemeElements" class="collection">
 
-    <script src=" app.js"></script>
+        </div>
+    </div>
+    <div class="pane">
+        <h3 id="turtle-title"></h3>
+        <div style="display: flex; flex-direction: column; height: 100vh;">
+            <textarea id="turtle" style="flex: 1; width: 100%;"></textarea>
+        </div>
+    </div>
+</div>
+
+<script src=" app.js"></script>
 </body>
 
 </html>
